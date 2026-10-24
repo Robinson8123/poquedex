@@ -6,55 +6,50 @@ name: Build and deploy Node.js app to Azure Web App - pokedex
 on:
   push:
     branches:
-      - main
+      - 'main'
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
+    permissions:
+      contents: read #This is required for actions/checkout
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '18.x'
 
-      - name: Install dependencies and build Angular
+      - name: npm install, build, and test
         run: |
-          cd source/pokedex-angular
-          npm ci
-          npm run build -- --configuration production
-
-      - name: Copy web.config to dist folder
-        run: |
-          cp source/pokedex-angular/src/web.config source/pokedex-angular/dist/pokedex-angular/ 2>/dev/null || true
-
+          npm install
+          npm run build --if-present
+          npm run test --if-present
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: source/pokedex-angular/dist/pokedex-angular
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: node-app
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
+      
+      - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp
         with:
           app-name: 'pokedex'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6BCA96D220C74A6B8895FFFE31C70978 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_232FCA10FE8B488C807DC665CA0C2B4D }}
