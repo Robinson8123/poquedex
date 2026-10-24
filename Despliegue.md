@@ -17,4 +17,4 @@ Se incluyó el archivo `src/web.config` para asegurar la aplicación con calific
 - `Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://raw.githubusercontent.com https://pokeapi.co; connect-src 'self' https://pokeapi.co;`
 
 ## 3. Evidencia de Escaneo de Seguridad
-Se auditó la URL pública en [SecurityHeaders.com](https://securityheaders.com/) obteniendo calificación **A+**
+Se auditó la URL pública en [SecurityHeaders.com](https://securityheaders.com/?q=https%3A%2F%2Fpokedex-cwcjg2ctgab9dja2.brazilsouth-01.azurewebsites.net%2F&followRedirects=on) obteniendo calificación **A+**
