@@ -29,6 +29,10 @@ jobs:
           cd source/pokedex-angular
           npm run build -- --configuration production
 
+      - name: Copy web.config to dist folder
+        run: |
+          cp source/pokedex-angular/web.config source/pokedex-angular/dist/pokedex-angular/
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
