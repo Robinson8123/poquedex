@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd source/pokedex-angular
-          npm ci
+          npm ci --ignore-scripts
 
       - name: Build Angular app
         run: |
