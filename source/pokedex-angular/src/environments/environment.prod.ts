@@ -6,7 +6,7 @@ export const environment = {
   homePokeApi: 'https://pokeapi.co/',
   keilerLinkedin: 'https://www.linkedin.com/in/keilermora/',
   pokedexGithub: 'https://github.com/keilermora/pokedex-angular',
-  imagesPath: '/pokedex-angular/assets/images',
+  imagesPath: 'assets/images', // <--- CAMBIO AQUÍ (Ruta relativa limpia)
   language: 'en',
   languageId: 9,
 };
