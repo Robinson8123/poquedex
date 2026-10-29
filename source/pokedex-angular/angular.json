@@ -31,7 +31,7 @@
               "src/og-image.jpg",
               "src/assets",
               "src/404.html",
-              "web.config"
+              "src/web.config"
             ],
             "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
